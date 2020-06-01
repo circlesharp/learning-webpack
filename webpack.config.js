@@ -10,7 +10,7 @@
  * 6. bundle -> 最终打包完成的文件，一般就是和 chunk 一一对应的关系，bundle 就是对 chunk 进行便意压缩打包等处理后的产出
  */
 
-/** <-- webpack 蓝图 -->
+/** <-- webpack 简介 -->
  * webpack 是一个模块打包工具
  * 能够从一个需要处理的 JavaScript 文件开始
  * 构建一个依赖关系图（dependency graph），该图映射到了项目中每个模块
