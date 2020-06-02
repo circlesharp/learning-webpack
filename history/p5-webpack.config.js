@@ -9,28 +9,19 @@
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin  = require('optimize-css-assets-webpack-plugin')
-const TerserJSPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[hash:6].js'
   },
-  optimization: {
-    minimizer: [
-      new OptimizeCSSAssetsPlugin(),
-      new TerserJSPlugin()
-    ]
-  },
   module: {
     rules: [
-      { test: /\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader' ] },
-      { test: /\.styl$/, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'stylus-loader' ] },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      { test: /\.styl$/, use: ['style-loader', 'css-loader', 'stylus-loader'] },
     ]
   },
   plugins: [
@@ -43,7 +34,6 @@ module.exports = {
         collapseWhitespace: true,
       }
     }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'main.css' })
+    new CleanWebpackPlugin()
   ]
 }

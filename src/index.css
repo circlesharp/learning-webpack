@@ -1,0 +1,8 @@
+@import './a.css';
+
+body {
+  background: rgb(231, 192, 192);
+}
+div {
+  transform: rotate(40deg);
+}

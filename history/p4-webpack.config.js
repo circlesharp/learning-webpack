@@ -9,41 +9,31 @@
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin  = require('optimize-css-assets-webpack-plugin')
-const TerserJSPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
+  devServer: {
+    port: 3000,
+    contentBase: './dist', // 目标文件夹
+    progress: true, // 进度条
+    compress: true // 压缩
+  },
   mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[hash:6].js'
   },
-  optimization: {
-    minimizer: [
-      new OptimizeCSSAssetsPlugin(),
-      new TerserJSPlugin()
-    ]
-  },
-  module: {
-    rules: [
-      { test: /\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader' ] },
-      { test: /\.styl$/, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'stylus-loader' ] },
-    ]
-  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/index.html', // 模板文件
       filename: 'index.html',
-      hash: true,
+      hash: true, // 哈希戳
       minify: {
-        removeAttributeQuotes: true,
-        collapseWhitespace: true,
+        removeAttributeQuotes: true, // 去掉双引号
+        collapseWhitespace: true, // 变成一行
       }
     }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'main.css' })
+    new CleanWebpackPlugin()
   ]
 }

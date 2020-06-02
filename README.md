@@ -23,3 +23,15 @@
 4. 在 plugins 中，`new html-webpack-plugin({ template, filename, hash, minify })`
 5. 哈希戳 [hash:n]
 6. (补充 打包前删除上一次的 dist 目录) clean-webpack-plugin
+
+## P5 样式处理-1
+1. `module: { rules: [ { test, use }, { test, use } ] }`
+2. use 的顺序是从右到左，stylus -> css -> style
+3. stylus-loader 需要 stylus, 但不需要写在 use 里面
+4. 当前都是插入到 html 文档里面
+
+## P6 样式处理-2
+1. 抽离 css 样式 -> 插件：`mini-css-extract-plugin`
+2. 自动加前缀 -> loading `postcss-loader`, `autoprefixer`, 需要额外配置 postcss.config.js
+3. 若仍不起左右，在 package.json 加上 browserslist 字段
+4. 增加 optimization 字段的 minimizer 字段，使用 `OptimizeCSSAssetsPlugin`, `TerserJSPlugin` 压缩 js, css
