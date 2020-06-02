@@ -35,3 +35,14 @@
 2. 自动加前缀 -> loading `postcss-loader`, `autoprefixer`, 需要额外配置 postcss.config.js
 3. 若仍不起左右，在 package.json 加上 browserslist 字段
 4. 增加 optimization 字段的 minimizer 字段，使用 `OptimizeCSSAssetsPlugin`, `TerserJSPlugin` 压缩 js, css
+
+## P7 转化ES6语法
+1. `babel`, `@babel/core`, `@babel/preset-env`
+2. 还有更加高级的插件，比如说：类，装饰器……
+3. 这里的 use 里面可以放 options, 还有 plugins （比较复杂）
+
+## P8 处理js更高级的语法与校验
+1. 看 babel 文档吧
+2. 检验：ESLint, `eslint`, `eslint-loader`
+3. module.rules 是从右向左，从下到上，可以在 `options` 增加 `enforce: 'pre'` 字段强制
+4. .eslintrc.json 去 https://eslint.org/demo 下载

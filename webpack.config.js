@@ -7,6 +7,7 @@
  * 然后将这个依赖关系图输出到一个或者多个 bundle 中
  */
 
+
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -29,8 +30,48 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader' ] },
-      { test: /\.styl$/, use: [ MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'stylus-loader' ] },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader'
+        ]
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'stylus-loader'
+        ]
+      },
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src'),
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [ '@babel/preset-env' ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties'
+            ]
+          }
+        }
+      },
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src'),
+        exclude: /node_modules/,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            enforce: 'pre' // 强制 pre, post
+          }
+        }
+      }
     ]
   },
   plugins: [
