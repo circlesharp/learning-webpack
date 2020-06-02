@@ -1,4 +1,3 @@
-const hello = require('./hello')
-const world = require('./world')
+const str = require('./a')
 
-console.log(hello, world)
+console.log(str)
