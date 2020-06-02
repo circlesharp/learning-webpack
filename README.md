@@ -46,3 +46,7 @@
 2. 检验：ESLint, `eslint`, `eslint-loader`
 3. module.rules 是从右向左，从下到上，可以在 `options` 增加 `enforce: 'pre'` 字段强制
 4. .eslintrc.json 去 https://eslint.org/demo 下载
+5. `Cannot assign to read only property 'exports' of object '#<Object>'` -> 
+https://www.jianshu.com/p/acec542bcfc4
+6. 
+
