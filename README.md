@@ -2,6 +2,7 @@
 
 ## P0 description
 1. https://www.bilibili.com/video/BV1a4411e7Bz?p=3
+2. 感谢 zfpx
 
 ## P2 webpack 基础配置
 1. mode, entry, output
