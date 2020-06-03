@@ -27,13 +27,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash:6].js'
   },
-  devtool: 'source-map',
-  watch: true,
-  watchOptions: {
-    poll: 1000, // 每秒询问我 n 次
-    aggregateTimeout: 500, // 节流
-    ignored: /node_module/ // 不监控的
-  },
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin(),
@@ -119,6 +112,14 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
       hash: true,
+      chunks: [ 'home', 'other' ],
+      minify: { removeAttributeQuotes: true, collapseWhitespace: true }
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'other.html',
+      hash: true,
+      chunks: [ 'other' ],
       minify: { removeAttributeQuotes: true, collapseWhitespace: true }
     }),
     new CleanWebpackPlugin(),

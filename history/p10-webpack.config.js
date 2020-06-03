@@ -18,21 +18,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   // mode: 'development',
   mode: 'production',
-  // entry: './src/index.js',
-  entry: {
-    home: './src/index.js',
-    other: './src/other.js'
-  },
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash:6].js'
-  },
-  devtool: 'source-map',
-  watch: true,
-  watchOptions: {
-    poll: 1000, // 每秒询问我 n 次
-    aggregateTimeout: 500, // 节流
-    ignored: /node_module/ // 不监控的
+    filename: 'bundle.[hash:6].js'
   },
   optimization: {
     minimizer: [
@@ -53,10 +42,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../' }
-          },
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader'
         ]
@@ -64,10 +50,7 @@ module.exports = {
       {
         test: /\.styl$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../' }
-          },
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'stylus-loader'
@@ -119,10 +102,14 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
       hash: true,
-      minify: { removeAttributeQuotes: true, collapseWhitespace: true }
+      // minify: false
+      minify: {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+      }
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: './css/main.css' }),
+    new MiniCssExtractPlugin({ filename: 'main.css' }),
     new webpack.ProvidePlugin({ $: 'jquery' })
   ]
 }

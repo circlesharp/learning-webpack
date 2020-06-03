@@ -1,7 +1,7 @@
 require('@babel/polyfill')
 
 class B {
-  b = 'b in class B'
+  b = 'b in class B..'
 }
 
 function * gen (params) {

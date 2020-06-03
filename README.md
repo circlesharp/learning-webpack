@@ -65,3 +65,23 @@ https://www.jianshu.com/p/acec542bcfc4
 5. file-loader: 生成文件到 build 目录，并返回图片文件名（带 hash）
 6. html-withimg-loader：解决 html 的图片引入（有毛病的, fileload 要配置 `esModule: false`）
 7. url-loader 依赖 file-loader, 要配置 `options: { limit: 200 * 1024, esModule: false }`, base64 会比源文件大 1/3 , 还可以配置 outputPath
+
+## P11 打包文件分类
+1. 给 MiniCssExtractPlugin 配置 `{ filename: './css/main.css' }`
+2. publicPath 可以单独在 loader 里面配置(ps. 这里老师没讲到，css 也要配置，否则找不到图片)
+
+## P12 打包多页应用
+1. entry 分别配置
+2. output 的 filename 字段为 `[name].[hash:6].js`
+3. new 两次 HtmlWebpackPlugin，改 filename, 添加对应 chunks 数组
+
+## P13 配置source-map
+1. 源码映射 niubi.. 增加映射文件，帮助调试源代码
+2. 配置 `devtool: 'source-map'`, 会生成一个 .map 的映射文件，大而全且独立
+3. eval-source-map -> 不会产出单独文件，但可以显示行和列
+4. cheap-moudule-source-map -> 不会产生列，但是有单独的映射文件
+5. cheap-moudule-eval-source-map -> 不会产生文件，集成在打包后的文件中，不会产生列（但是有行）
+
+## P14 watch的用法
+1. `watch: true` 只要改代码，就会实时编译
+2. `watchOption: { poll, aggregateTimeout, ignored }`
