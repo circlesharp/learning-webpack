@@ -48,5 +48,20 @@
 4. .eslintrc.json 去 https://eslint.org/demo 下载
 5. `Cannot assign to read only property 'exports' of object '#<Object>'` -> 
 https://www.jianshu.com/p/acec542bcfc4
-6. 
 
+## P9 全局变量引入
+1. expose-loader
+2. Loader 的分类：pre, normal, post, 內联
+3. 方法1 - 內联的用法：`import $ from 'expose-loader?$!jquery'`
+4. 方法1 - 配置的用法：`{ test: require.resolve('jquery'), use: 'expose-loader?$' }`
+5. 方法2 - 在每个模块注入：`new webpack.ProvidePlugin({ $: 'jquery' })`
+6. 方法3 - 引入但不打包：使用 CDN, 且在配置文件中加入 externals 字段
+
+## P10 图片的处理
+1. 有3种方式
+2. 方法1 - 在 js 种创建图片来引入 `let img = new Image(); img.src = ''`
+3. 方法2 - 在 css 引入 `background('url')`
+4. 方法3 - `<img src="" alt="" />`
+5. file-loader: 生成文件到 build 目录，并返回图片文件名（带 hash）
+6. html-withimg-loader：解决 html 的图片引入（有毛病的, fileload 要配置 `esModule: false`）
+7. url-loader 依赖 file-loader, 要配置 `options: { limit: 200 * 1024, esModule: false }`, base64 会比源文件大 1/3 , 还可以配置 outputPath

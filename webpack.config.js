@@ -7,8 +7,8 @@
  * 然后将这个依赖关系图输出到一个或者多个 bundle 中
  */
 
-
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin  = require('optimize-css-assets-webpack-plugin')
@@ -16,8 +16,8 @@ const TerserJSPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
-  // mode: 'production',
+  // mode: 'development',
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -31,6 +31,14 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: require.resolve('jquery'),
+      //   use: 'expose-loader?$'
+      // },
+      {
+        test: /\.html$/,
+        use: 'html-withimg-loader'
+      },
       {
         test: /\.css$/,
         use: [
@@ -64,10 +72,22 @@ module.exports = {
           }
         }
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            // limit: 200 * 1024,
+            limit: 200,
+            esModule: false,
+            outputPath: './img/'
+          }
+        }
+      },
       // {
       //   test: /\.js$/,
       //   include: path.resolve(__dirname, 'src'),
-      //   exclude: /node_modules/,
+      //   exclude: /(node_modules|dist)/,
       //   use: {
       //     loader: 'eslint-loader',
       //     options: {
@@ -82,12 +102,14 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
       hash: true,
+      // minify: false
       minify: {
         removeAttributeQuotes: true,
         collapseWhitespace: true,
       }
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'main.css' })
+    new MiniCssExtractPlugin({ filename: 'main.css' }),
+    new webpack.ProvidePlugin({ $: 'jquery' })
   ]
 }

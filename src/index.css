@@ -4,5 +4,5 @@ body {
   background: rgb(231, 192, 192);
 }
 div {
-  transform: rotate(40deg);
+  background-image: url('./lovelyBcm.png');
 }
