@@ -13,6 +13,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin  = require('optimize-css-assets-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
@@ -28,12 +29,6 @@ module.exports = {
     filename: '[name].[hash:6].js'
   },
   devtool: 'source-map',
-  watch: true,
-  watchOptions: {
-    poll: 1000, // 每秒询问我 n 次
-    aggregateTimeout: 500, // 节流
-    ignored: /node_module/ // 不监控的
-  },
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin(),
@@ -55,7 +50,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../' }
+            options: { publicPath: './' }
           },
           'css-loader',
           'postcss-loader'
@@ -66,7 +61,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../' }
+            options: { publicPath: './' }
           },
           'css-loader',
           'postcss-loader',
@@ -121,8 +116,33 @@ module.exports = {
       hash: true,
       minify: { removeAttributeQuotes: true, collapseWhitespace: true }
     }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: './history', to: './_history' }]
+    }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: './css/main.css' }),
-    new webpack.ProvidePlugin({ $: 'jquery' })
-  ]
+    new MiniCssExtractPlugin([{ filename: './css/main.css' }]),
+    new webpack.ProvidePlugin({ $: 'jquery' }),
+    new webpack.BannerPlugin('make 2020 by Tan Rongzhao')
+  ],
+  devServer: {
+    // 1 代理法
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:3000',
+    //     pathRewrite: { '/api': '' }
+    //   }
+    // },
+
+    // 2 mock 法
+    // before (app) {
+    //   app.get('/user', (req, res) => {
+    //     res.json({
+    //       name: 'circlesharp before'
+    //     })
+    //   })
+    // }
+
+    // 3 webpack 中间件法，用服务端端口
+    // webpack-dev-middleware
+  }
 }

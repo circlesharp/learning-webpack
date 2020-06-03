@@ -85,3 +85,13 @@ https://www.jianshu.com/p/acec542bcfc4
 ## P14 watch的用法
 1. `watch: true` 只要改代码，就会实时编译
 2. `watchOption: { poll, aggregateTimeout, ignored }`
+
+## P15 webpack小插件应用
+1. cleanWebpackPlugin
+2. copyWebpackPlugin (坑爹的文档，传入对象，第一个字段为 patterns)
+3. bannerPlugin （内置的版权声明插件）
+
+## P16 webpack跨域问题
+1. 配置 devServer 的 proxy, 如果后端没有给出 /api, 使用 `target, pathRewrite`
+2. 如果只想 mock 数据，使用 devServer 的 before -> `before (app) { app.get()... }`
+3. 前后端一起启动，使用服务端端口，使用 `webpack-dev-middleware` 中间件
