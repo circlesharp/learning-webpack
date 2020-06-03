@@ -14,6 +14,21 @@ print(str)
 print($)
 print(bcm)
 
+// 环境变量
+let url
+switch (DEV) {
+  case 'development':
+    url = 'http://localhost:3000'
+    break
+  default:
+    url = 'http://rtfm.work'
+    break;
+}
+console.log(url)
+console.log(ESSPRESION)
+console.log(FLAG)
+
+
 let image = new Image()
 image.src = bcm
 document.body.appendChild(image)

@@ -11,8 +11,6 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin  = require('optimize-css-assets-webpack-plugin')
-const TerserJSPlugin = require('terser-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
@@ -32,13 +30,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash:6].js'
-  },
-  devtool: 'source-map',
-  optimization: {
-    minimizer: [
-      new OptimizeCSSAssetsPlugin(),
-      new TerserJSPlugin()
-    ]
   },
   module: {
     rules: [
@@ -127,27 +118,10 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin([{ filename: './css/main.css' }]),
     new webpack.ProvidePlugin({ $: 'jquery' }),
-    new webpack.BannerPlugin('make 2020 by Tan Rongzhao')
-  ],
-  devServer: {
-    // 1 代理法
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:3000',
-    //     pathRewrite: { '/api': '' }
-    //   }
-    // },
-
-    // 2 mock 法
-    // before (app) {
-    //   app.get('/user', (req, res) => {
-    //     res.json({
-    //       name: 'circlesharp before'
-    //     })
-    //   })
-    // }
-
-    // 3 webpack 中间件法，用服务端端口
-    // webpack-dev-middleware
-  }
+    new webpack.BannerPlugin('make 2020 by Tan Rongzhao'),
+    new webpack.DefinePlugin({
+      FLAG: 'true',
+      ESSPRESION: '2**2'
+    })
+  ]
 }

@@ -102,3 +102,14 @@ https://www.jianshu.com/p/acec542bcfc4
 3. mainFields 指定宿主版本的模块代码
 4. mainFiles 指定入口文件
 5. extensions 省略导入时候的拓展名
+
+## P18 定义环境变量
+1. `webpack.DefinePlugin` 中配置变量
+2. `webpack.DefinePlugin({ DEV: JSON.stringify('dev') })`
+3. 表达式也需要左右两边加引号，可用 JSON.stringify 转字符串
+
+## P19 区分不同环境
+1. webpack-merge 里面的 smart 进行合并：`module.exports = smart(base, { ... })`
+2. `npm run build -- --config webpack.dev.js`
+3. 可以把 devtool, devServer 放到 webpack.dev.js
+4. 可以把 optimization 放到 webpack.prod.js
