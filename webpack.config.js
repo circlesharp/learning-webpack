@@ -24,6 +24,11 @@ module.exports = {
     home: './src/index.js',
     other: './src/other.js'
   },
+  resolve: {
+    modules: [ path.resolve('node_modules') ],
+    alias: {},
+    extensions: [ '.js', '.css', '.styl', '.json', '.vue' ],
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash:6].js'

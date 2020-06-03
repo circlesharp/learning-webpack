@@ -3,8 +3,8 @@
 // const str = require('./a')
 // const bcm = require('../lovelyBcm.png')
 
-import './index.css'
-import './index.styl'
+import './style'
+import './stylus-style'
 import str from './a'
 import bcm from './lovelyBcm.png'
 

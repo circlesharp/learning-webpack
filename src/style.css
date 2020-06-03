@@ -1,0 +1,8 @@
+@import './a.css';
+
+body {
+  background: rgb(231, 192, 192);
+}
+div {
+  background-image: url('./lovelyBcm.png');
+}

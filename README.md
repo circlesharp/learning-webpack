@@ -95,3 +95,10 @@ https://www.jianshu.com/p/acec542bcfc4
 1. 配置 devServer 的 proxy, 如果后端没有给出 /api, 使用 `target, pathRewrite`
 2. 如果只想 mock 数据，使用 devServer 的 before -> `before (app) { app.get()... }`
 3. 前后端一起启动，使用服务端端口，使用 `webpack-dev-middleware` 中间件
+
+## P17 resolve属性
+1. modules 限制 commonjs 的模块查找规则
+2. alias 别名
+3. mainFields 指定宿主版本的模块代码
+4. mainFiles 指定入口文件
+5. extensions 省略导入时候的拓展名
