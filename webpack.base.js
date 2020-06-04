@@ -12,7 +12,6 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   // mode: 'development',
@@ -32,6 +31,7 @@ module.exports = {
     filename: '[name].[hash:6].js'
   },
   module: {
+    noParse: /jquery/,
     rules: [
       // {
       //   test: require.resolve('jquery'),
@@ -115,10 +115,10 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [{ from: './history', to: './_history' }]
     }),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin([{ filename: './css/main.css' }]),
     new webpack.ProvidePlugin({ $: 'jquery' }),
     new webpack.BannerPlugin('make 2020 by Tan Rongzhao'),
+    new webpack.IgnorePlugin(/\.\/locale/, /moment/),
     new webpack.DefinePlugin({
       FLAG: 'true',
       ESSPRESION: '2**2'
