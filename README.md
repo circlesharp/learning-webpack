@@ -135,3 +135,9 @@ https://www.jianshu.com/p/acec542bcfc4
 4. `webpack.DllPlugin({ name, path })` 配置任务清单 -> manifest.json
 5. 在总配置文件中配置 `new webpack.DllReferencePlugin({ manifest })`
 6. ps: devServer 的配置：`devServer: { port, open, contentBase }`
+
+## P23 happypack
+1. 使用多线程进行打包，确实快了
+2. 先配置 js loader 的 `use: 'Happypack/loader?id=js'`
+3. 再配置 plugins 的 `new Happypack({ id: 'js', use: [ 原本的loader ] })`
+
