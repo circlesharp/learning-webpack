@@ -12,6 +12,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const Happypack = require('happypack')
 
 module.exports = {
   // mode: 'development',
@@ -68,17 +69,7 @@ module.exports = {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [ '@babel/preset-env' ],
-            plugins: [
-              [ "@babel/plugin-proposal-decorators", { "legacy": true } ],
-              [ "@babel/plugin-proposal-class-properties", { "loose" : true } ],
-              "@babel/plugin-transform-runtime",
-            ]
-          }
-        }
+        use: 'Happypack/loader?id=js'
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -106,6 +97,22 @@ module.exports = {
     ]
   },
   plugins: [
+    new Happypack({
+      id: 'js',
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: [ '@babel/preset-env' ],
+            plugins: [
+              [ "@babel/plugin-proposal-decorators", { "legacy": true } ],
+              [ "@babel/plugin-proposal-class-properties", { "loose" : true } ],
+              "@babel/plugin-transform-runtime",
+            ]
+          }
+        }
+      ]
+    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',

@@ -127,7 +127,7 @@ https://www.jianshu.com/p/acec542bcfc4
 > 原来的分支为 zfpx_1-21
 ****
 
-## P22 dllPlugin
-1. dll -> Dynamic Link Library -> 动态链接库
-2. 
-
+## P23 happypack
+1. 使用多线程进行打包，确实快了
+2. 先配置 js loader 的 `use: 'Happypack/loader?id=js'`
+3. 再配置 plugins 的 `new Happypack({ id: 'js', use: [ 原本的loader ] })`
