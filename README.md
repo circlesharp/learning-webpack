@@ -130,5 +130,6 @@ https://www.jianshu.com/p/acec542bcfc4
 ## P22 dllPlugin
 1. dll -> Dynamic Link Library -> 动态链接库
 2. 把 react, react-dom 抽离，单独打包，新建 webpack.config.react.js
-3. 
-
+3. 在dll配置文件中配置 output 的 `library` 字段，接收返回值, 也可以指定 `libraryTarget: 'var' / 'commonjs' / 'umd' ...)`
+4. `webpack.DllPlugin({ name, path })` 配置任务清单 -> manifest.json
+5. 在总配置文件中配置 `new webpack.DllReferencePlugin({ manifest })`
