@@ -12,7 +12,7 @@ module.exports = {
   devServer: {
     port: 3000,
     open: true,
-    contentBase: './dist'
+    contentBase: './dist' // 告诉服务器从哪个目录中提供内容, 只有在你想要提供静态文件时才需要
   },
   module: {
     rules: [
