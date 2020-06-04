@@ -113,3 +113,21 @@ https://www.jianshu.com/p/acec542bcfc4
 2. `npm run build -- --config webpack.dev.js`
 3. 可以把 devtool, devServer 放到 webpack.dev.js
 4. 可以把 optimization 放到 webpack.prod.js
+
+## P20 noParse
+1. 配置 `modules: { noParse }` 不去解析这个模块
+
+## P21 ingorePlugin
+1. 首先引用了 moment, 这个库还引入了很多东西，例如设置中文 `moment.locale('zh-cn')`
+2. 配置 `new webpack.IgnorePlugin(/\.\/locale/, /moment/)`
+3. 手动引入 `require('moment/locale/zh-cn')`
+
+****
+**新建分支**
+> 原来的分支为 zfpx_1-21
+****
+
+## P22 dllPlugin
+1. dll -> Dynamic Link Library -> 动态链接库
+2. 
+
