@@ -4,40 +4,31 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     port: 3000,
     open: true,
-    contentBase: './dist' // 告诉服务器从哪个目录中提供内容, 只有在你想要提供静态文件时才需要
+    hot: true,
+    contentBase: './dist'
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_module/,
-        include: path.resolve(__dirname, 'src'),
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
-            ]
-          }
-        }
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_module/,
+      include: path.resolve(__dirname, 'src'),
+      use: {
+        loader: 'babel-loader',
+        options: { presets: [ '@babel/preset-env' ] }
       }
-    ]
+    }]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html'
-    }),
-    new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, 'dist', 'manifest.json')
-    }),
+    new HtmlWebpackPlugin({ template: './public/index.html' }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 }

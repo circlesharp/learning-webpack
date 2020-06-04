@@ -1,4 +1,11 @@
-const React = require('react')
-const { render } = require('react-dom')
+// import "babel-polyfill"
 
-render(<h1>jsx</h1>, window.root)
+let button = document.createElement('button')
+button.innerText = 'click me'
+document.body.appendChild(button)
+
+button.addEventListener('click', async function () {
+  // es6 草案语法
+  let source = await import('./source')
+  console.log(source.default)
+})

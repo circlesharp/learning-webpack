@@ -141,3 +141,37 @@ https://www.jianshu.com/p/acec542bcfc4
 2. 先配置 js loader 的 `use: 'Happypack/loader?id=js'`
 3. 再配置 plugins 的 `new Happypack({ id: 'js', use: [ 原本的loader ] })`
 
+## P24 webpack自带优化
+1. tree-shaking: import 在生产环境下，会自动去掉没用的代码（require 不行）
+2. scope-hosting: 作用域提升，生产环境下自动省略可以简化的代码
+
+## P25 抽离公共代码
+1. 分割代码块: `optimization:{splitChunks:{cacheGroups:{common, vendor}}}`
+2. 补充：splitChunk 的理解 -> https://www.cnblogs.com/kwzm/p/10314438.html
+3. 补充：what is **chunk**
+> 1. what is module? -> js的模块化
+> 2. what is chunk? -> webpack 根据功能拆分出来的，包含3种情况
+>> 1. 项目入口 entry
+>> 2. 通过 import 动态引入的代码
+>> 3. 通过 splitChunks 拆分出来的代码
+>> 4. sum_up: chunk包含着module, 可能是一对多, 也可能是一对一
+> 3. what is bundle? -> webpack打包之后的各个文件
+>> 1. bundle 与 chunk 是一对一关系
+>> 2. bundle 就是对 chunk 进行编译压缩打包等处理之后的产出
+4. **chunks** 的 参数 `async, initial, all`
+5. **cacheGroups** 默认两个缓存组：vender, default (zfpx 用的是 common)
+
+## P26 懒加载
+1. 不同配置，只需要使用 import 方法，得到一个 promise 对象
+2. 如果要使用高级的 es 语法，可以这样配置 `entry: ['babel-polyfill', './src/index.js']`
+
+## P27 热更新
+1. 在 devServer 配置 `hot: true`
+2. 热更新插件 `new webpack.HotModuleReplacementPlugin()`
+3. 打印更新的文件路径 `new webpack.NamedModulesPlugin()`
+4. 在资源文件中，还可以通过 `if (module.hot) { module.hot.accept(path, callback) }`
+
+## P28 Tapable
+1. Webpack 本质上是一种事件流机制，工作流程就是将各个插件串联起来，实现这个的核心是 Tapable
+2. Tapable 有点类似 node 的 events 库，核心原理依赖发布订阅模式
+3. 
