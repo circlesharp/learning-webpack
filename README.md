@@ -129,5 +129,6 @@ https://www.jianshu.com/p/acec542bcfc4
 
 ## P22 dllPlugin
 1. dll -> Dynamic Link Library -> 动态链接库
-2. 
+2. 把 react, react-dom 抽离，单独打包，新建 webpack.config.react.js
+3. 
 
