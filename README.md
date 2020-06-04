@@ -174,4 +174,4 @@ https://www.jianshu.com/p/acec542bcfc4
 ## P28 Tapable
 1. Webpack 本质上是一种事件流机制，工作流程就是将各个插件串联起来，实现这个的核心是 Tapable
 2. Tapable 有点类似 node 的 events 库，核心原理依赖发布订阅模式
-3. 
+3. SyncHook, SyncBailHook, SyncWaterfallHook 的实现
