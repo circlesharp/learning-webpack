@@ -1,4 +1,4 @@
-class AsyncSeriesHook {
+class AsyncSeriesWaterfallHook {
   constructor (args) { // args -> ['name']
     this.tasks = []
   }
@@ -6,29 +6,41 @@ class AsyncSeriesHook {
     this.tasks.push(task)
   }
   callAsync (...args) {
-    const finalCallback = args.pop()
+    let finalCallback = args.pop()
     let idx = 0
-    const next = () => {
-      if (idx === this.tasks.length) return finalCallback()
-      this.tasks[idx++](...args, next)
+    let next = (err, data) => {
+      let task = this.tasks[idx++]
+      if (!task) return finalCallback()
+      if (idx === 0) {
+        task(...args, next)
+      } else {
+        task(data, next)
+      }
     }
     next()
   }
+  _callAsync (...args) {
+    let finalCallback = args.pop()
+    let [ first, ...others ] = this.tasks
+    const done = (err, ...args) => {
+      if (!err) return args
+    }
+    others.reduce((c, n) => n(c, done), first(...args, done))
+  }
 }
 
-let hook = new AsyncSeriesHook(['name'])
-
+let hook = new AsyncSeriesWaterfallHook(['name'])
 
 hook.tapAsync('node', function (name, cb) {
   setTimeout(() => {
     console.log('node ', name)
-    cb()
+    cb(null, 'node is good~')
   }, 1000)
 })
 
-hook.tapAsync('webpack', function (name, cb) {
+hook.tapAsync('webpack', function (data, cb) {
   setTimeout(() => {
-    console.log('webpack ', name)
+    console.log('webpack ', data)
     cb()
   }, 1000)
 })

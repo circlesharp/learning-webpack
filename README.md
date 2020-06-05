@@ -198,3 +198,11 @@ https://www.jianshu.com/p/acec542bcfc4
 1. AsyncSeries* -> 异步串行
 > An async-series hook can be tapped with synchronous, callback-based and promise-based functions (using myHook.tap(), myHook.tapAsync() and myHook.tapPromise()). They call each async method in a row.
 2. callAsync 的实现使用的 next 非常像 express 的源码，每一个 task 都递归调用 next, 递归边界是长度相等
+3. tapPromise 类似 redux 源码，使用 reduce 收敛，太牛了，then 要返回 promise 对象
+
+## P32 AsycSeriesWaterfallHook
+1. 难点在于，异步串行，要借鉴 asyncSeries 的 callAsync 的实现
+2. callAsync 有3个内部的变量，idx, finalCallback, next
+3. next 是关键，作用就是将注册在数组里面的函数依此调用，并在每一次调用时都会传入 next
+4. next 能够实现串行是因为，在异步操作执行到最后才触发
+5. 实现 waterfallHook, 关键还要传参
