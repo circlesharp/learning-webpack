@@ -187,4 +187,7 @@ https://www.jianshu.com/p/acec542bcfc4
 > TODO ?? 同步遇到某个不返回 undefined 的监听函数会多次执行
 
 ## P30 AsyncParallelHook
-1. 
+1. AsyncParallel* -> 异步并发
+> An async-parallel hook can also be tapped with synchronous, callback-based and promise-based functions (using myHook.tap(), myHook.tapAsync() and myHook.tapPromise()). However, they run each async method in parallel.
+2. tapAsync 传入的 callback 好像 next, 这个 callback 还是一个计数器，如果计数器数量 === 注册函数的数量，才执行 callAsync 的 finalCallback
+3. tapPromise 的写法太优雅了，使用到了 `Array.prototype.map`, `Promise.all` 实现
