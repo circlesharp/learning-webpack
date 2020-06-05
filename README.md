@@ -171,7 +171,20 @@ https://www.jianshu.com/p/acec542bcfc4
 3. 打印更新的文件路径 `new webpack.NamedModulesPlugin()`
 4. 在资源文件中，还可以通过 `if (module.hot) { module.hot.accept(path, callback) }`
 
-## P28 Tapable
+## P28 Tapable-1
 1. Webpack 本质上是一种事件流机制，工作流程就是将各个插件串联起来，实现这个的核心是 Tapable
 2. Tapable 有点类似 node 的 events 库，核心原理依赖发布订阅模式
-3. SyncHook, SyncBailHook, SyncWaterfallHook 的实现
+3. doc -> https://www.npmjs.com/package/tapable
+
+## P29 Tapable-2
+1. SyncHook
+> Basic hook (without “Waterfall”, “Bail” or “Loop” in its name). This hook simply calls every function it tapped in a row.
+2. SyncBailHook
+> A bail hook allows exiting early. When any of the tapped function returns anything, the bail hook will stop executing the remaining ones.
+3. SyncWaterfallHook -> 实现方法很棒
+> A waterfall hook also calls each tapped function in a row. Unlike the basic hook, it passes a return value from each function to the next function.
+4. SyncLoopHook -> 实现方法很棒，用到 call
+> TODO ?? 同步遇到某个不返回 undefined 的监听函数会多次执行
+
+## P30 AsyncParallelHook
+1. 
