@@ -206,3 +206,9 @@ https://www.jianshu.com/p/acec542bcfc4
 3. next 是关键，作用就是将注册在数组里面的函数依此调用，并在每一次调用时都会传入 next
 4. next 能够实现串行是因为，在异步操作执行到最后才触发
 5. 实现 waterfallHook, 关键还要传参
+
+****
+**新建分支**
+1. 分支主题：手写 webpack
+2. 分支名称：rewriteWebpack
+****
