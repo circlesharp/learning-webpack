@@ -41,13 +41,13 @@ module.exports = 'a' + b;`);
 	 
 		"./src\base\b.js":
 			(function(module, exports, __webpack_require__) {
-			eval(`module.exports = 'b';`);
+			eval(`module.exports = 'b \n bbb';`);
 			}),
 	 
 		"./src\index.styl":
 			(function(module, exports, __webpack_require__) {
 			eval(`let style = document.createElement('style');
-style.innerHTML = "body {\n  background: #ffc0cb;\n}\n";
+style.innerHTML = "body {\\n  background: #ffc0cb;\\n}\\n";
 document.head.appendChild(style);`);
 			}),
 	 

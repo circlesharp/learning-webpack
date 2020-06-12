@@ -1,5 +1,21 @@
 const path = require('path')
 
+// 插件
+class P {
+  apply (compiler) {
+    compiler.hooks.emit.tap('emit', function() {
+      console.log('emit')
+    })
+  }
+}
+class P1 {
+  apply (compiler) {
+    compiler.hooks.afterPlugins.tap('afterPlugins', function() {
+      console.log('afterPlugins')
+    })
+  }
+}
+
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
@@ -17,5 +33,9 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new P(),
+    new P1(),
+  ]
 }
