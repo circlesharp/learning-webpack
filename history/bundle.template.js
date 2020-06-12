@@ -13,7 +13,8 @@
  			i: moduleId,
  			l: false,
  			exports: {}
- 		};
+		 };
+		console.log(modules[moduleId])
  		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
  		module.l = true;
  		return module.exports;
