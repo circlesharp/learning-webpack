@@ -232,3 +232,23 @@ https://www.jianshu.com/p/acec542bcfc4
 > 3. 路径 -> `resolveLoader:{ modules: ['node_modules', path.resolve(__dirname, 'loaders')] },`
 
 ## P41 loader的配置
+1. loader 的顺序：从右到左，从下到上
+2. loader 的分类：
+> 1. `enforce: 'pre'`
+> 2. normal -> defalut
+> 3. inline -> `const str = require('inline-loader!./a.js')`
+>> 1. `require('inline-loader!./a.js')` -> 正常顺序
+>> 2. `require('-!inline-loader!./a.js')` -> 不会通过 pre + normal
+>> 3. `require('!inline-loader!./a.js')` ->  没有 normal
+>> 4. `require('!!inline-loader!./a.js')` ->  只要 inline-loader
+> 4. `enforce: 'post'`
+3. picthLoader & normalLoader
+> 1. normal 部分才是倒着执行
+> 2. 如果 pitch 有返回值，会跳过 pitch, normal 后面的，跳到前一个 normalLoader
+>> ps. 好像加了后 inline 就不管用了？
+
+## P42 babel-loader的实现
+1. 先安装依赖 `npm i @bable/core @babel/preset-env`
+2. `npm i loader-utils`
+3. loader 函数里面的 this 有很多属性, 使用 `loaderUtils.getOptions(this)` 获取 options, 然后能获取预设 presets
+4. `babel.transform` 以及 `this.async` -> `cb(err, res.code, res.map)`
