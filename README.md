@@ -212,3 +212,23 @@ https://www.jianshu.com/p/acec542bcfc4
 1. 分支主题：手写 webpack
 2. 分支名称：rewriteWebpack
 ****
+
+## P33 webpack手写
+1. 通过正统的 webpack 打包出了 bundle.js
+2. 通过改写，得出 bundle.template.js
+3. 新建了一个 repo -> mypack
+4. `npm link mypack` 把全局的包映射到本地, 然后就可以使用 `npm mypack`
+
+****
+**回到主分支**
+1. 分支主题：loader plugin 的编写
+2. 分支名称：master
+****
+
+## P40 loader
+1. 自定义 loader 的路径处理
+> 1. 写死 -> `use: path.resolve(__dirname, 'loaders', 'loader1')`
+> 2. 别名 -> `resolveLoader:{ alias: { loader1: path.resolve(__dirname, 'loaders', 'loader1') } },`
+> 3. 路径 -> `resolveLoader:{ modules: ['node_modules', path.resolve(__dirname, 'loaders')] },`
+
+## P41 loader的配置
