@@ -260,4 +260,20 @@ https://www.jianshu.com/p/acec542bcfc4
 4. 根据配置实现读文件还是读字符串，并且统一使用异步
 5. 默认的保留缓存，也可以显示写下来 `this.cacheable && this.cacheable()`
 
-## P44 
+## P44 实现file-loader和url-loader
+1. file-loader -> 根据图片生成 md5, 发射到 dist 目录，返回新路径
+2. file-loader的实现
+> 1. 通过 `loaderUtils.interpolateName` 确定文件名
+> 2. 通过 `this.emitFile(filename, source)` 发射文件
+> 3. 通过 `return "module.exports = '${filename}'"` 返回路径
+>> 不像 js 在 build.js 中是源码，file 在对象中又是一次导出，导出的是文件发射后的名字
+3. url-loader -> 处理路径，然后交给 file-loader 处理; 特色是 options 的 limit 字段
+4. 安装依赖 `npm i mime`
+5. url-loader的实现
+> 1. 判断体积 `limit > source.length`
+> 2. 当体积没超，返回 file-loader 的处理结果 `return require('./file-loader').call(this, source)`
+> 3. 当体积超过，返回base64字符串 `module.exports = "data:${type};base64,${src}"`
+>> 1. `type = mime.getType(this.resourcePath)`
+>> 2. `src = source.toString('base64')`
+
+## P45 less-loader和css-loader

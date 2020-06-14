@@ -1,14 +1,5 @@
-const str = require('./a.js')
+import pic from './buffer.jpg'
 
-class Dog {
-  constructor () {
-    this.name = 'puppy'
-  }
-  bark () {
-    return this.name
-  }
-}
-
-let dog = new Dog()
-
-console.log('hello', str, dog.name)
+let img = document.createElement('img')
+img.src = pic
+document.body.appendChild(img)

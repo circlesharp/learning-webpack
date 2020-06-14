@@ -11,6 +11,7 @@ module.exports = {
     modules: ['node_modules', path.resolve(__dirname, 'loaders')]
   },
   devtool: 'source-map',
+  watch: true,
   module: {
     rules:[
       {
@@ -20,24 +21,6 @@ module.exports = {
           options: {
             text: 'author: circlesharp',
             filename: path.resolve(__dirname, 'banner.txt')
-          }
-        }
-      },
-      // {
-      //   test: /\.jpg/,
-      //   use: {
-      //     loader: 'file-loader',
-      //     options:{
-
-      //     }
-      //   }
-      // },
-      {
-        test: /\.jpg/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 20 * 1024
           }
         }
       }
