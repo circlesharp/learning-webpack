@@ -11,16 +11,14 @@ module.exports = {
     modules: ['node_modules', path.resolve(__dirname, 'loaders')]
   },
   devtool: 'source-map',
-  watch: true,
   module: {
     rules:[
       {
         test: /\.js$/,
         use: {
-          loader: 'banner-loader',
+          loader: 'babel-loader',
           options: {
-            text: 'author: circlesharp',
-            filename: path.resolve(__dirname, 'banner.txt')
+            presets: [ '@babel/preset-env' ]
           }
         }
       }

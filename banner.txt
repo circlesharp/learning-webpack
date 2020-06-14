@@ -1,0 +1,4 @@
+circlesharp is a good boy
+from the banner.txt
+String.prototype.trim
+123

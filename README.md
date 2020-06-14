@@ -252,3 +252,12 @@ https://www.jianshu.com/p/acec542bcfc4
 2. `npm i loader-utils`
 3. loader 函数里面的 this 有很多属性, 使用 `loaderUtils.getOptions(this)` 获取 options, 然后能获取预设 presets
 4. `babel.transform` 以及 `this.async` -> `cb(err, res.code, res.map)`
+
+## P43 banner-loader实现
+1. 先安装依赖 `npm i schema-utils`，关键在于 banner-loader.js
+2. 校验 -> `validateOptions(schema, options, loaderName)`
+3. watch依赖 -> `this.addDependency(fileName)`，配合配置文件的 `watch: true`
+4. 根据配置实现读文件还是读字符串，并且统一使用异步
+5. 默认的保留缓存，也可以显示写下来 `this.cacheable && this.cacheable()`
+
+## P44 
